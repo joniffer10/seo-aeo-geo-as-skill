@@ -1,0 +1,69 @@
+# robots.txt — Safe Baseline Template
+#
+# USAGE NOTES:
+#
+# This template assumes a standard web application with:
+# - Public-facing marketing and content pages (indexable)
+# - Authenticated user areas (not indexable)
+# - Admin interfaces (not indexable)
+#
+# IMPORTANT: robots.txt controls crawler behavior only. It does NOT
+# provide security or access control. Private routes must be protected
+# by authentication at the application or infrastructure layer, regardless
+# of what appears in this file.
+#
+# IMPORTANT: Blocking a route in robots.txt does not remove it from
+# search engine indexes. To deindex a page, use:
+#   <meta name="robots" content="noindex"> on the page itself, OR
+#   the URL removal tool in Google Search Console.
+#
+# DO NOT:
+# - Block routes that should be indexed
+# - Assume robots.txt is a security mechanism
+# - Blindly block all AI or search crawlers without understanding the impact
+# - Copy this file without reviewing the Disallow rules for your project
+#
+# UPDATE this file to match your actual route structure before deploying.
+# -----------------------------------------------------------------------
+
+User-agent: *
+
+# Disallow authenticated/private areas
+Disallow: /dashboard/
+Disallow: /admin/
+Disallow: /account/
+Disallow: /settings/
+Disallow: /api/
+
+# Disallow internal/utility routes
+Disallow: /login
+Disallow: /logout
+Disallow: /register
+Disallow: /verify-email
+Disallow: /reset-password
+
+# Allow everything else
+Allow: /
+
+# Sitemap location (update to your actual sitemap URL)
+Sitemap: https://example.com/sitemap.xml
+
+# -----------------------------------------------------------------------
+# Notes on specific crawlers:
+#
+# GPTBot (OpenAI): Respects robots.txt.
+#   - To block OpenAI from crawling: add "User-agent: GPTBot" + "Disallow: /"
+#   - Do NOT block unless you have a specific, deliberate reason to do so.
+#   - Blocking GPTBot reduces visibility to ChatGPT's browsing and future training.
+#
+# Google-Extended (Google AI training): Respects robots.txt.
+#   - To opt out of Google AI training use: User-agent: Google-Extended + Disallow: /
+#   - Note: This does NOT affect Google Search ranking or Googlebot crawling.
+#
+# Googlebot: Do NOT block. Blocking will remove you from Google Search.
+#
+# Bingbot: Do NOT block. Blocking will remove you from Bing Search.
+#
+# Default recommendation: Allow all crawlers on all public-facing content.
+# Make deliberate, informed decisions before blocking any named crawler.
+# -----------------------------------------------------------------------
